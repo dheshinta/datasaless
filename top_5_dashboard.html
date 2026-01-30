@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top 5 Products Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    canvas {
+      margin-top: 30px;
+      max-width: 100%;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .chart-container {
+      width: 48%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Top 5 Products Dashboard</h1>
+  <div class="container">
+    <!-- Top 5 Products by Quantity -->
+    <div class="chart-container">
+      <canvas id="topProductsChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Sample JSON Data (Top 5 Products)
+    const salesData = [
+      { "PRODUCT NAME": "Product A", "ORDER QTY": 3000 },
+      { "PRODUCT NAME": "Product B", "ORDER QTY": 2700 },
+      { "PRODUCT NAME": "Product C", "ORDER QTY": 2400 },
+      { "PRODUCT NAME": "Product D", "ORDER QTY": 2200 },
+      { "PRODUCT NAME": "Product E", "ORDER QTY": 2000 }
+    ];
+
+    // Prepare data for chart
+    const labels = salesData.map(item => item['PRODUCT NAME']);
+    const data = salesData.map(item => item['ORDER QTY']);
+
+    // Create the chart using Chart.js
+    const ctx = document.getElementById('topProductsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Top 5 Products by Order Quantity',
+          data: data,
+          backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33F6', '#FFC300'],
+          borderColor: '#000',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
